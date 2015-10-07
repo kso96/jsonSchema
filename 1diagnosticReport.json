@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Diagnostic Report",
+  "description": "Substation Circuit Breaker Diagnostic Report",
+  "type": "object",
+  "properties": {
+    "diagnosticReportStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Complete"
+      ],
+      "description": "Diagnostic Report Status"
+    },
+    "diagnosticWorkOrder": {
+      "type": "integer",
+      "description": "Diagnostic Work Order"
+    },
+    "recordableFailure": {
+      "type": "string",
+      "description": "Recordable Failure"
+    },
+    "followUpNeeded": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ],
+      "description": "Follow-up Needed"
+    },
+    "failureOccurredDuring": {
+      "type": "string",
+      "enum": [
+        "In-Service",
+        "Testing"
+      ],
+      "type": "string",
+      "description": "Failure Occurred During"
+    },
+    "dateDiagnosticCompleted": {
+      "format": "date",
+      "type": "string",
+      "description": "Date Diagnostic Completed"
+    },
+    "formCompletedBy": {
+      "type": "string",
+      "description": "Form Completed by"
+    },
+    "opCo": {
+      "type": "string",
+      "description": "OpCo"
+    },
+    "pmCategory": {
+      "type": "string",
+      "enum": [
+        "Minor",
+        "Complete",
+        "Mechanism Service",
+        "Commission"
+      ],
+      "description": "PM Category"
+    },
+    "substationName": {
+      "type": "string",
+      "description": "Substation Name"
+    },
+    "breakerNumber": {
+      "type": "integer",
+      "description": "Breaker Number"
+    },
+    "utc": {
+      "type": "integer",
+      "description": "UTC"
+    }
+  }
+}
