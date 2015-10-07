@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Equipment Data",
+  "description": "Equipment Data",
+  "type": "object",
+  "properties": {
+    "manufacturer": {
+      "type": "string",
+      "description": "Manufacturer"
+    },
+    "model": {
+      "type": "string",
+      "description": "Model"
+    },
+    "serialNumber": {
+      "type": "integer",
+      "description": "Serial Number"
+    },
+    "inServiceDate": {
+      "format": "date",
+      "type": "string",
+      "description": "In Service Date"
+    },
+    "instructionBook": {
+      "type": "string",
+      "description": "Instruction Book"
+    },
+    "mechType": {
+      "type": "string",
+      "description": "Mech type"
+    },
+    "ratedVoltage": {
+      "type": "integer",
+      "description": "Rated Voltage",
+      "minimum": 0
+    },
+    "ampacity": {
+      "type": "integer",
+      "description": "Ampacity",
+      "minimum": 0
+    },
+    "maxInterruptingAmps": {
+      "type": "integer",
+      "description": "Maximum Interrupting Amps"
+    },
+    "mechInstrBk": {
+      "type": "string",
+      "description": "Mech Instr Bk"
+    },
+    "latestCounterRead": {
+      "type": "integer",
+      "description": "Latest Counter Read",
+      "minimum": 0
+    },
+    "numberOfTanks": {
+      "type": "integer",
+      "description": "Number Of Tanks",
+      "minimum": 0
+    },
+    "totalGallonsOfOil": {
+      "type": "integer",
+      "description": "Total Gallons Of Oil",
+      "minimum": 0
+    },
+    "totalPoundsOfSf6": {
+      "type": "number",
+      "description": "Total Pounds of SF6",
+      "minimum": 0
+    },
+    "lastMinorDiagDate": {
+      "format": "date",
+      "type": "string",
+      "description": "Last Minor Diag Date"
+    },
+    "lastCompleteDiagDate": {
+      "format": "date",
+      "type": "string",
+      "description": "Last Complete Diag Date"
+    },
+    "numberOperSinceLastComplete": {
+      "type": "object",
+      "description": "Number Operations Since Last Complete",
+      "properties": {
+        "fault": {
+          "type": "integer",
+          "description": "Count of fault"
+        },
+        "nonFault": {
+          "type": "integer",
+          "description": "Count of non-fault"
+        }
+      }
+    }
+  }
+}
