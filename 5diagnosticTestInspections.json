@@ -1,4 +1,694 @@
 {
-  "name": "application-name",
-  "version": "0.0.1"
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Detailed visual inspection",
+  "type": "object",
+  "description": "Detailed visual inspection",
+  "properties": {
+    "dateTestCompleted": {
+      "type": "string",
+      "format": "date",
+      "description": "Date offline testing completed"
+    },
+    "offlineTestPerformer": {
+      "type": "string",
+      "description": "Who did complete offline testing"
+    },
+    "operationsCounter": {
+      "type": "object",
+      "description": "Operation counter",
+      "properties": {
+        "found": {
+          "type": "integer",
+          "description": "As found",
+          "minimum": 0
+        },
+        "left": {
+          "type": "integer",
+          "description": "As left",
+          "minimum": 0
+        },
+        "functioningCorrectly": {
+          "description": "Functioning correctly",
+          "$ref": "#/definitions/shortAnswers"
+        }
+      }
+    },
+    "oilTests": {
+      "type": "object",
+      "description": "Oil tests",
+      "properties": {
+        "dielectric": {
+          "$ref": "#/definitions/primaryTestTemplate"
+        },
+        "color": {
+          "$ref": "#/definitions/stringTestTemplate"
+        },
+        "moisture": {
+          "$ref": "#/definitions/primaryTestTemplate"
+        },
+        "leakDetected": {
+          "type": "string",
+          "description": "Leak Detected?",
+          "enum": [
+            "Yes",
+            "No"
+          ]
+        }
+      }
+    },
+    "firstTripTest": {
+      "type": "object",
+      "description": "First Trip Test",
+      "properties": {
+        "tripLatchTime": {
+          "$ref": "#/definitions/primaryTestTemplate"
+        },
+        "concatOpTime": {
+          "$ref": "#/definitions/primaryTestTemplate"
+        },
+        "dcVoltage": {
+          "type": "object",
+          "description": "DC Voltage",
+          "properties": {
+            "vIni": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vMin1": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vMin2": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vMin3": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "drop": {
+          "type": "object",
+          "properties": {
+            "Spec": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vDrop1": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vDrop2": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vDrop3": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "contactOpTime": {
+          "$ref": "#/definitions/primaryTestTemplate"
+        }
+      }
+    },
+    "offLineTimingTests": {
+      "type": "object",
+      "description": "Off-line timing tests",
+      "properties": {
+        "tripInitiate": {
+          "description": "Trip-Initiate/Part(ms)",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "closeInitiate": {
+          "description": "Close-Initiate/Touch(ms)",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "tripFreeClose": {
+          "description": "Trip Free - Close Initiate/Part",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "liveDwellTime": {
+          "description": "Live/Dwell Time-Touch/Part",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "tripInitiateTouch": {
+          "description": "Reclose - Trip Initiate/Touch",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "poleDisagreement": {
+          "description": "Pole Disagreement(ms)",
+          "type": "object",
+          "properties": {
+            "trip": {
+              "$ref": "#/definitions/poleDisagreementTemplate"
+            },
+            "close": {
+              "$ref": "#/definitions/poleDisagreementTemplate"
+            }
+          }
+        }
+      }
+    },
+    "dashpots": {
+      "type": "string",
+      "enum": [
+        "OK",
+        "Leaking",
+        "Oil level low",
+        "Leaking & low oil"
+      ]
+    },
+    "notesTimingTests": {
+      "type": "string",
+      "description": "Notes from off-line Timing Tests"
+    },
+    "travelVelocityAnalysis": {
+      "type": "object",
+      "description": "Travel/Velocity Analysis",
+      "properties": {
+        "contactStroke": {
+          "description": "distance is greenLegend",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "contactWipe": {
+          "description": "distance is greenLegend",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "overTravel": {
+          "description": "distance is greenLegend",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "openVelocity": {
+          "description": "speed is greenLegend",
+          "speed": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "closeVelocity": {
+          "description": "speed is greenLegend",
+          "speed": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "notesTravelAnalysis": {
+          "type": "string",
+          "description": "Notes from travel analysis"
+        }
+      }
+    },
+    "recloserControlTests": {
+      "type": "object",
+      "description": "Recloser control tests(perform recloser control tests and indicate results",
+      "properties": {
+        "isTripFuncCorrect": {
+          "type": "string",
+          "description": "Tripping fucntion and time correct?",
+          "enum": [
+            "Yes",
+            "No"
+          ]
+        },
+        "isReclosingFuncCorrect": {
+          "type": "string",
+          "description": "Reclosing fucntion and time correct?",
+          "enum": [
+            "Yes",
+            "No"
+          ]
+        },
+        "noteRecloserTests": {
+          "type": "string",
+          "description": "Notes from recloser control tests"
+        }
+      }
+    },
+    "insulationResistanceTest": {
+      "type": "object",
+      "description": "Insulation Resistance Test - Megger or Doble",
+      "properties": {
+        "megger30sec": {
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "megger60sec": {
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "megger2min": {
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "doblePf": {
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        }
+      }
+    },
+    "hiPotTest": {
+      "type": "object",
+      "description": "Hi-Pot Test",
+      "properties": {
+        "testVoltage": {
+          "type": "number"
+        },
+        "testVoltageType": {
+          "type": "string",
+          "description": "what is it?",
+          "enum": [
+            "AC",
+            "DC"
+          ]
+        },
+        "accrossOpenContacts": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole2": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole3": {
+              "$ref": "#/definitions/passFailEnum"
+            }
+          }
+        },
+        "contactsClosed": {
+          "type": "object",
+          "description": "is it correct object",
+          "properties": {
+            "pole1": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole2": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole3": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole1to2": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole2to3": {
+              "$ref": "#/definitions/passFailEnum"
+            }
+          }
+        },
+        "insulationTestComments": {
+          "type": "string"
+        }
+      }
+    },
+    "vacuumSealedIndication": {
+      "type": "object",
+      "description": "Vacuum/Sealed SF6 Contact Wear Indication",
+      "properties": {
+        "newWearMeasurementSpec": {
+          "type": "string"
+        },
+        "endWearMeasurementSpec": {
+          "type": "string"
+        },
+        "wearMeasurements": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "type": "string"
+            },
+            "pole2": {
+              "type": "string"
+            },
+            "pole3": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "contactResistance": {
+      "type": "object",
+      "properties": {
+        "maxSpec": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pole1": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pole2": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pole3": {
+          "type": "number",
+          "minimum": 0
+        },
+        "notes": {
+          "type": "string",
+          "minimum": 0
+        }
+      }
+    },
+    "pressureSettings": {
+      "type": "object",
+      "description": "IS IT OKAY?",
+      "properties": {
+        "operate": {
+          "type": "object",
+          "description": "types are correct",
+          "properties": {
+            "compPump": {
+              "type": "string"
+            },
+            "alarm": {
+              "type": "string"
+            },
+            "lockout": {
+              "type": "string"
+            },
+            "preCharge": {
+              "type": "string"
+            }
+          }
+        },
+        "reset": {
+          "type": "object",
+          "description": "types are correct",
+          "properties": {
+            "compPump": {
+              "type": "string"
+            },
+            "alarm": {
+              "type": "string"
+            },
+            "lockout": {
+              "type": "string"
+            },
+            "preCharge": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "airCompressor": {
+      "type": "object",
+      "properties": {
+        "isOilReplaced": {
+          "$ref": "#/definitions/shortAnswers"
+        },
+        "isFilterReplaced": {
+          "$ref": "#/definitions/shortAnswers"
+        }
+      }
+    },
+    "hydraulicSystem": {
+      "type": "object",
+      "properties": {
+        "isScreenCleaned": {
+          "$ref": "#/definitions/shortAnswers"
+        },
+        "isHydFluidReplaced": {
+          "$ref": "#/definitions/shortAnswers"
+        }
+      }
+    },
+    "lowGasPressureTests": {
+      "type": "object",
+      "properties": {
+        "function": {
+          "type": "object",
+          "properties": {
+            "stage1": {
+              "$ref": "#/definitions/lowGasTestFunctionEnum"
+            },
+            "stage2": {
+              "$ref": "#/definitions/lowGasTestFunctionEnum"
+            }
+          }
+        },
+        "isFunctioningProperly": {
+          "type": "object",
+          "properties": {
+            "stage1": {
+              "type": "string",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "stage2": {
+              "type": "string",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "springSystems": {
+      "type": "object",
+      "description": "isItOkay?",
+      "properties": {
+        "doSystemsRechargingProperly": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ]
+        }
+      }
+    },
+    "coilResistance": {
+      "type": "object",
+      "description": "typesIsOkay?",
+      "properties": {
+        "closeCoil": {
+          "type": "number"
+        },
+        "tc1": {
+          "type": "number"
+        },
+        "tc2": {
+          "type": "number"
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "other": {
+          "type": "string"
+        },
+        "other": {
+          "type": "string"
+        },
+        "other": {
+          "type": "string"
+        },
+        "other": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "operationsCounter": {
+      "type": "object",
+      "description": "typesIsOkay?",
+      "properties": {
+        "asLeftReading": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "type": "string"
+            },
+            "pole2": {
+              "type": "string"
+            },
+            "pole3": {
+              "type": "string"
+            }
+          }
+        },
+        "functioningCorrectly": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole2": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole3": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "shortAnswers": {
+      "type": "string",
+      "description": "Types of possible answers for simple questions",
+      "enum": [
+        "N/A",
+        "Yes",
+        "No"
+      ]
+    },
+    "primaryTestTemplate": {
+      "type": "object",
+      "description": "Primary template for number data",
+      "properties": {
+        "spec": {
+          "description": "blueLegend",
+          "type": "number",
+          "minimum": 0
+        },
+        "pole1": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pole2": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pole3": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "stringTestTemplate": {
+      "type": "object",
+      "description": "Primary template for string data",
+      "properties": {
+        "spec": {
+          "description": "blueLegend",
+          "type": "string"
+        },
+        "pole1": {
+          "type": "string"
+        },
+        "pole2": {
+          "type": "string"
+        },
+        "pole3": {
+          "type": "string"
+        }
+      }
+    },
+    "testTemplateWithMinAndMax": {
+      "type": "object",
+      "description": "Primary template for data with min and max fields",
+      "properties": {
+        "specMin": {
+          "description": "blueLegend",
+          "type": "number"
+        },
+        "specMax": {
+          "description": "blueLegend",
+          "type": "number"
+        },
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        }
+      }
+    },
+    "poleDisagreementTemplate": {
+      "type": "object",
+      "properties": {
+        "specMax": {
+          "type": "number"
+        },
+        "firstToLast": {
+          "type": "number"
+        }
+      }
+    },
+    "insulationResistanceTemplate": {
+      "type": "object",
+      "description": "template for insulation resistance object",
+      "properties": {
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        }
+      }
+    },
+    "passFailEnum": {
+      "type": "string",
+      "enum": [
+        "Pass",
+        "Fail"
+      ]
+    },
+    "lowGasTestFunctionEnum": {
+      "type": "string",
+      "enum": [
+        "Alarm only",
+        "Alarm and Block Trip",
+        "Alarm and Block Close"
+      ]
+    },
+    "operationsCounterEnum": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No - Replaced",
+        "No - Not replaced"
+      ]
+    }
+  },
+  "required": [
+    "dateTestCompleted",
+    "offlineTestPerformer",
+    "operationsCounter",
+    "oilTests",
+    "firstTripTest",
+    "offLineTimingTests",
+    "dashpots",
+    "notesTimingTests",
+    "travelVelocityAnalysis",
+    "recloserControlTests",
+    "insulationResistanceTest",
+    "hiPotTest",
+    "vacuumSealedIndication",
+    "contactResistance",
+    "pressureSettings",
+    "airCompressor",
+    "hydraulicSystem",
+    "lowGasPressureTests",
+    "springSystems",
+    "coilResistance",
+    "operationsCounter"
+  ]
 }

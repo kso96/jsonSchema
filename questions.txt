@@ -1,5 +1,17 @@
 Какие поля required?
+Что такое Specs?
+Оно пропускает пустой объект и объект с другими полями
+Date немного другой
 1)
 2)
 3)  - Result Scores (Tank) засунул в enum и сделал стрином из-за "4*"
     - Что такое POLE#1, POLE#2
+4)
+5) Pole-Disagreement- ПРОВЕРИТЬ!!!
+  - Megohoms - integer?
+  - AC or DC - что это?
+  -contactsClosed правильно?
+  - wear measurements specification - какой тип данных?
+  - Pressure switch settings - проверить
+6) - operationg counter - не видно текст
+   - travel/velocity analysis - правильно ли я сосласля?

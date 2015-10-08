@@ -1,0 +1,228 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Mechanism service and testing",
+  "type": "object",
+  "description": "Mechanism service and as-left testing",
+  "properties": {
+    "dateTestCompleted": {
+      "type": "string",
+      "format": "date",
+      "description": "Date mechanism service completed"
+    },
+    "offlineTestPerformer": {
+      "type": "string",
+      "description": "Who did complete offline testing"
+    },
+    "operationCounter": {
+      "reading": {
+        "type": "object",
+        "description": "isTypeOkay?",
+        "properties": {
+          "pole1": {
+            "type": "string"
+          },
+          "pole2": {
+            "type": "string"
+          },
+          "pole3": {
+            "type": "string"
+          }
+        }
+      },
+      "generalCondition": {
+        "type": "string",
+        "description": "describe general condition of mechanism..."
+      }
+    },
+    "timingTests": {
+      "type": "object",
+      "description": "As-Left timing tests",
+      "properties": {
+        "tripInitiate": {
+          "description": "Trip-Initiate/Part(ms)",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "closeInitiate": {
+          "description": "Close-Initiate/Touch(ms)",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "closeInitiate": {
+          "description": "Close-Initiate/Part(ms)",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "timeTouch": {
+          "description": "Time-Touch/Part(mc)",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "tripInitiateTouch": {
+          "description": "Trip-Initiate/Touch(cy)",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "poleDisagreement": {
+          "description": "Pole Disagreement(ms)",
+          "type": "object",
+          "properties": {
+            "trip": {
+              "$ref": "#/definitions/poleDisagreementTemplate"
+            },
+            "close": {
+              "$ref": "#/definitions/poleDisagreementTemplate"
+            }
+          }
+        },
+        "notesFromTimingTests": {
+          "type": "string"
+        }
+      }
+    },
+    "travelVelocityTests": {
+      "type": "object",
+      "description": "As-Left Travel/Velocity Tests",
+      "properties": {
+        "contactStroke": {
+          "description": "distance is greenLegend",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "contactWipe": {
+          "description": "distance is greenLegend",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "overTravel": {
+          "description": "distance is greenLegend",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "openVelocity": {
+          "description": "speed is greenLegend",
+          "speed": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "closeVelocity": {
+          "description": "speed is greenLegend",
+          "speed": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "notesTravelAnalysis": {
+          "type": "string",
+          "description": "Notes from travel analysis"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "shortAnswers": {
+      "type": "string",
+      "description": "Types of possible answers for simple questions",
+      "enum": [
+        "N/A",
+        "Yes",
+        "No"
+      ]
+    },
+    "primaryTestTemplate": {
+      "type": "object",
+      "description": "Primary template for number data",
+      "properties": {
+        "spec": {
+          "description": "blueLegend",
+          "type": "number",
+          "minimum": 0
+        },
+        "pole1": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pole2": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pole3": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "testTemplateWithMinAndMax": {
+      "type": "object",
+      "description": "Primary template for data with min and max fields",
+      "properties": {
+        "specMin": {
+          "description": "blueLegend",
+          "type": "number"
+        },
+        "specMax": {
+          "description": "blueLegend",
+          "type": "number"
+        },
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        }
+      }
+    },
+    "poleDisagreementTemplate": {
+      "type": "object",
+      "properties": {
+        "specMax": {
+          "type": "number"
+        },
+        "firstToLast": {
+          "type": "number"
+        }
+      }
+    },
+    "operationsCounter": {
+      "type": "object",
+      "description": "typesIsOkay?",
+      "properties": {
+        "asLeftReading": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "type": "string"
+            },
+            "pole2": {
+              "type": "string"
+            },
+            "pole3": {
+              "type": "string"
+            }
+          }
+        },
+        "functioningCorrectly": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole2": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole3": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+  ]
+}
