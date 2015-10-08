@@ -18,7 +18,7 @@
       "description": "Information about inspection of air system",
       "properties": {
         "airSystem": {
-          "description": "Air System",
+          "description": "Air System?isItOkay: dublicate(airSystem.airSystem)",
           "$ref": "#/definitions/shortAnswers"
         },
         "leaks": {
@@ -70,12 +70,12 @@
           "type": "number",
           "description": "Amount of hours while pump is running",
           "minimum": 0
+        },
+        "noteEnergySystem": {
+          "type": "string",
+          "description": "Notes from stored energy system visual inspection"
         }
       }
-    },
-    "noteEnergySystem": {
-      "type": "string",
-      "description": "Notes from stored energy system visual inspection"
     },
     "controlCabinet": {
       "type": "object",
@@ -107,11 +107,11 @@
           "description": "Heaters working?",
           "$ref": "#/definitions/shortAnswers"
         }
+      },
+      "noteCabinet": {
+        "type": "string",
+        "description": "Notes from control cabinet visual inspection"
       }
-    },
-    "noteCabinet": {
-      "type": "string",
-      "description": "Notes from control cabinet visual inspection"
     },
     "externalInspection": {
       "bushings": {
@@ -144,23 +144,27 @@
           "No"
         ]
       },
-      "paintCondition":{
-        "type":"string",
-        "description":"Paint condition?",
-        "enum":["Good", "Fair", "Poor"]
+      "paintCondition": {
+        "type": "string",
+        "description": "Paint condition?",
+        "enum": [
+          "Good",
+          "Fair",
+          "Poor"
+        ]
       },
-      "oilLeaks":{
+      "oilLeaks": {
         "description": "Oil leaks?",
         "$ref": "#/definitions/shortAnswers"
       },
-      "sfPressure":{
+      "sfPressure": {
         "description": "SF6 pressure OK?",
         "$ref": "#/definitions/shortAnswers"
+      },
+      "noteExternalInspection": {
+        "type": "string",
+        "description": "Notes from external visual inspection"
       }
-    },
-    "noteExternalInspection": {
-      "type": "string",
-      "description": "Notes from external visual inspection"
     }
   },
   "definitions": {
