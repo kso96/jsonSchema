@@ -1,0 +1,5 @@
+Какие поля required?
+1)
+2)
+3)  - Result Scores (Tank) засунул в enum и сделал стрином из-за "4*"
+    - Что такое POLE#1, POLE#2

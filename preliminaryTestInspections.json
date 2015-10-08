@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Test and Inspections",
+  "description": "Preliminary test and inspections",
+  "type": "object",
+  "properties": {
+    "breakerOilAnalysis": {
+      "type": "object",
+      "description": "Breaker Oil Analysis",
+      "properties": {
+        "breakerOilAnalysis": {
+          "$ref": "#/definitions/dateWithSign"
+        },
+        "breakerGasAnalysis": {
+          "$ref": "#/definitions/dateWithSign",
+          "description": "Breaker Gas Analysis"
+        },
+        "detailedInfraredInspection": {
+          "type": "object",
+          "description": "Detailed Infrared Inspection",
+          "properties": {
+            "dateSamplesTaken": {
+              "format": "date-time",
+              "type": "string",
+              "description": "a date when samples were taken"
+            },
+            "sampleDrawnBy": {
+              "type": "integer",
+              "description": "a person who drew samples"
+            }
+          }
+        },
+        "resultScores": {
+          "type": "array",
+          "description": "Result Scores(Tank)",
+          "items": [
+            { "$ref":"#/definitions/tankRating" },
+            { "$ref":"#/definitions/tankRating" },
+            { "$ref":"#/definitions/tankRating" }
+          ]
+        }
+      },
+      "definitions": {
+        "dateWithSign": {
+          "type": "object",
+          "description": "Object with date and signature",
+          "properties": {
+            "dateSamplesTaken": {
+              "format": "date",
+              "type": "string",
+              "description": "a date when samples were taken"
+            },
+            "sampleDrawnBy": {
+              "type": "integer",
+              "description": "a person who drew samples"
+            }
+          }
+        },
+        "tankRating": {
+          "type": "string",
+          "enum": [ "1", "2", "3", "4", "4*" ]
+        }
+      }
+    }
+  }
+}
