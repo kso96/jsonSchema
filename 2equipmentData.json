@@ -30,17 +30,17 @@
       "description": "Mech type"
     },
     "ratedVoltage": {
-      "type": "integer",
+      "type": "number",
       "description": "Rated Voltage",
       "minimum": 0
     },
     "ampacity": {
-      "type": "integer",
+      "type": "number",
       "description": "Ampacity",
       "minimum": 0
     },
     "maxInterruptingAmps": {
-      "type": "integer",
+      "type": "number",
       "description": "Maximum Interrupting Amps"
     },
     "mechInstrBk": {
@@ -58,7 +58,7 @@
       "minimum": 0
     },
     "totalGallonsOfOil": {
-      "type": "integer",
+      "type": "number",
       "description": "Total Gallons Of Oil",
       "minimum": 0
     },
@@ -77,17 +77,17 @@
       "type": "string",
       "description": "Last Complete Diag Date"
     },
-    "numberOperSinceLastComplete": {
+    "numberOperationsSinceLastComplete": {
       "type": "object",
       "description": "Number Operations Since Last Complete",
       "properties": {
         "fault": {
           "type": "integer",
-          "description": "Count of fault"
+          "description": "Count of fault?type"
         },
         "nonFault": {
           "type": "integer",
-          "description": "Count of non-fault"
+          "description": "Count of non-fault?type"
         }
       }
     }
