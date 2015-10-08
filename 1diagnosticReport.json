@@ -5,27 +5,19 @@
   "type": "object",
   "properties": {
     "diagnosticReportStatus": {
-      "type": "string",
-      "enum": [
-        "Active",
-        "Complete"
-      ],
-      "description": "Diagnostic Report Status"
+      "description": "Diagnostic Report Status",
+      "$ref": "#/definitions/yesNoEnum"
     },
     "diagnosticWorkOrder": {
       "type": "integer",
-      "description": "Diagnostic Work Order"
+      "description": "Diagnostic Work Order?limitations"
     },
     "recordableFailure": {
-      "type": "string",
-      "description": "Recordable Failure"
+      "type": "string?type",
+      "description": "Recordable Failure?type"
     },
     "followUpNeeded": {
-      "type": "string",
-      "enum": [
-        "Yes",
-        "No"
-      ],
+      "$ref": "#/definitions/yesNoEnum",
       "description": "Follow-up Needed"
     },
     "failureOccurredDuring": {
@@ -34,7 +26,6 @@
         "In-Service",
         "Testing"
       ],
-      "type": "string",
       "description": "Failure Occurred During"
     },
     "dateDiagnosticCompleted": {
@@ -48,7 +39,7 @@
     },
     "opCo": {
       "type": "string",
-      "description": "OpCo"
+      "description": "OpCo?type"
     },
     "pmCategory": {
       "type": "string",
@@ -66,11 +57,20 @@
     },
     "breakerNumber": {
       "type": "integer",
-      "description": "Breaker Number"
+      "description": "Breaker Number?limitations"
     },
     "utc": {
       "type": "integer",
-      "description": "UTC"
+      "description": "UTC?limitations"
+    }
+  },
+  "definitions": {
+    "yesNoEnum": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
     }
   }
 }

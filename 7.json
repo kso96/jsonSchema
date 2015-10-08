@@ -1,4 +1,93 @@
 {
-  "name": "application-name",
-  "version": "0.0.1"
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Result",
+  "type": "object",
+  "description": "Result",
+  "properties": {
+    "numberOfProblemsFound": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 12
+    },
+    "problems": {
+      "type": "array",
+      "items": [
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        },
+        {
+          "$ref": "#/definitions/problemItem"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "problemCategoriesEnum": {
+      "type": "string",
+      "enum": [
+        "Bushings",
+        "Mechanism -- Stored Energy",
+        "Mechanism -- Other",
+        "Internal -- Insulation",
+        "Internal -- Conduction Path",
+        "Internal -- Interrupters",
+        "Control Cabinet",
+        "Other External"
+      ]
+    },
+    "workRequestRequiredEnum": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "problemItem": {
+      "type": "object",
+      "properties": {
+        "problemCategory": {
+          "$ref": "#/definitions/problemCategoriesEnum"
+        },
+        "workRequestRequired": {
+          "$ref": "#/definitions/workRequestRequiredEnum"
+        },
+        "workRequestNumber": {
+          "type": "integer"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

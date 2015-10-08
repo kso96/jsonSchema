@@ -6,59 +6,99 @@
   "properties": {
     "breakerOilAnalysis": {
       "type": "object",
-      "description": "Breaker Oil Analysis",
+      "description": "Breaker Oil Analysis?can'tAddRef",
       "properties": {
-        "breakerOilAnalysis": {
-          "$ref": "#/definitions/dateWithSign"
+        "dateSamplesTaken": {
+          "format": "date",
+          "type": "string",
+          "description": "a date when samples were taken"
         },
-        "breakerGasAnalysis": {
-          "$ref": "#/definitions/dateWithSign",
-          "description": "Breaker Gas Analysis"
-        },
-        "detailedInfraredInspection": {
-          "type": "object",
-          "description": "Detailed Infrared Inspection",
-          "properties": {
-            "dateSamplesTaken": {
-              "format": "date-time",
-              "type": "string",
-              "description": "a date when samples were taken"
-            },
-            "sampleDrawnBy": {
-              "type": "integer",
-              "description": "a person who drew samples"
-            }
-          }
+        "sampleDrawnBy": {
+          "type": "string",
+          "description": "a person who drew samples"
         },
         "resultScores": {
           "type": "array",
           "description": "Result Scores(Tank)",
           "items": [
-            { "$ref":"#/definitions/tankRating" },
-            { "$ref":"#/definitions/tankRating" },
-            { "$ref":"#/definitions/tankRating" }
+            {
+              "$ref": "#/definitions/tankRating"
+            },
+            {
+              "$ref": "#/definitions/tankRating"
+            },
+            {
+              "$ref": "#/definitions/tankRating"
+            }
           ]
         }
-      },
-      "definitions": {
-        "dateWithSign": {
-          "type": "object",
-          "description": "Object with date and signature",
-          "properties": {
-            "dateSamplesTaken": {
-              "format": "date",
-              "type": "string",
-              "description": "a date when samples were taken"
-            },
-            "sampleDrawnBy": {
-              "type": "integer",
-              "description": "a person who drew samples"
-            }
-          }
-        },
-        "tankRating": {
+      }
+    },
+    "breakerGasAnalysis": {
+      "type": "object",
+      "description": "Breaker Gas Analysis?can'tAddRef",
+      "properties": {
+        "dateSamplesTaken": {
+          "format": "date",
           "type": "string",
-          "enum": [ "1", "2", "3", "4", "4*" ]
+          "description": "a date when samples were taken"
+        },
+        "sampleDrawnBy": {
+          "type": "string",
+          "description": "a person who drew samples"
+        },
+        "moistureDewpoint": {
+          "$ref": "#/definitions/poleTemplate"
+        },
+        "purity": {
+          "$ref": "#/definitions/poleTemplate"
+        }
+      }
+    },
+    "detailedInfraredInspections": {
+      "$ref": "#/definitions/dateWithSign"
+    }
+  },
+  "definitions": {
+    "dateWithSign": {
+      "type": "object",
+      "description": "Object with date and signature",
+      "properties": {
+        "dateSamplesTaken": {
+          "format": "date",
+          "type": "string",
+          "description": "a date when samples were taken"
+        },
+        "sampleDrawnBy": {
+          "type": "string",
+          "description": "a person who drew samples"
+        }
+      }
+    },
+    "tankRating": {
+      "type": "string",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "4*"
+      ]
+    },
+    "poleTemplate": {
+      "type": "object",
+      "properties": {
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        },
+        "spec": {
+          "type": "number"
         }
       }
     }

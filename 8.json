@@ -1,4 +1,17 @@
 {
-  "name": "application-name",
-  "version": "0.0.1"
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Additional information",
+  "type": "object",
+  "description": "Additional information",
+  "properties": {
+    "workDone": {
+      "type": "string"
+    },
+    "materialsUsed": {
+      "type": "string"
+    },
+    "comments": {
+      "type": "string"
+    }
+  }
 }

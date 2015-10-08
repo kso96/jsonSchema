@@ -1,4 +1,12 @@
 {
-  "name": "application-name",
-  "version": "0.0.1"
+  "diagnosticReportStatus": "Yes",
+  "diagnosticWorkOrder": 1,
+  "recordableFailure": "test",
+  "followUpNeeded": "No",
+  "failureOccurredDuring": "In-Service",
+  "formCompletedBy": "testMan",
+  "opCo":"testOpCo",
+  "pmCategory":"Minor",
+  "substationName":"nameTest",
+  "breakerNumber":1
 }
