@@ -15,7 +15,7 @@
     },
     "operationsCounter": {
       "type": "object",
-      "description": "Operation counter",
+      "description": "Operation counter?checkTypes",
       "properties": {
         "found": {
           "type": "integer",
@@ -93,6 +93,7 @@
           "properties": {
             "Spec": {
               "type": "number",
+              "description": "pinkLegend?",
               "minimum": 0
             },
             "vDrop1": {
@@ -153,24 +154,29 @@
       }
     },
     "dashpots": {
-      "type": "string",
-      "enum": [
-        "OK",
-        "Leaking",
-        "Oil level low",
-        "Leaking & low oil"
-      ]
-    },
-    "notesTimingTests": {
-      "type": "string",
-      "description": "Notes from off-line Timing Tests"
+      "type": "object",
+      "properties": {
+        "leakingOrLowOil": {
+          "type": "string",
+          "enum": [
+            "OK",
+            "Leaking",
+            "Oil level low",
+            "Leaking & low oil"
+          ]
+        },
+        "notesTimingTests": {
+          "type": "string",
+          "description": "Notes from off-line Timing Tests"
+        }
+      }
     },
     "travelVelocityAnalysis": {
       "type": "object",
       "description": "Travel/Velocity Analysis",
       "properties": {
         "contactStroke": {
-          "description": "distance is greenLegend",
+          "description": "distance is greenLegend?isItOkayAndOther",
           "distance": {
             "type": "number"
           },
@@ -241,29 +247,28 @@
       "description": "Insulation Resistance Test - Megger or Doble",
       "properties": {
         "megger30sec": {
-          "$ref": "#/definitions/testTemplateWithMinAndMax"
+          "$ref": "#/definitions/polesSequence"
         },
         "megger60sec": {
-          "$ref": "#/definitions/testTemplateWithMinAndMax"
+          "$ref": "#/definitions/polesSequence"
         },
         "megger2min": {
-          "$ref": "#/definitions/testTemplateWithMinAndMax"
+          "$ref": "#/definitions/polesSequence"
         },
         "doblePf": {
-          "$ref": "#/definitions/testTemplateWithMinAndMax"
+          "$ref": "#/definitions/polesSequence"
         }
       }
     },
     "hiPotTest": {
       "type": "object",
-      "description": "Hi-Pot Test",
+      "description": "Hi-Pot Test? Can I ref pole1,pole2",
       "properties": {
         "testVoltage": {
           "type": "number"
         },
         "testVoltageType": {
           "type": "string",
-          "description": "what is it?",
           "enum": [
             "AC",
             "DC"
@@ -314,24 +319,15 @@
       "description": "Vacuum/Sealed SF6 Contact Wear Indication",
       "properties": {
         "newWearMeasurementSpec": {
+          "description": "blueLegend",
           "type": "string"
         },
         "endWearMeasurementSpec": {
+          "description": "blueLegend",
           "type": "string"
         },
         "wearMeasurements": {
-          "type": "object",
-          "properties": {
-            "pole1": {
-              "type": "string"
-            },
-            "pole2": {
-              "type": "string"
-            },
-            "pole3": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/polesSequence"
         }
       }
     },
@@ -366,7 +362,7 @@
       "properties": {
         "operate": {
           "type": "object",
-          "description": "types are correct",
+          "description": "types are correct?",
           "properties": {
             "compPump": {
               "type": "string"
@@ -622,6 +618,7 @@
       "type": "object",
       "properties": {
         "specMax": {
+          "description": "blueLegend",
           "type": "number"
         },
         "firstToLast": {
@@ -666,29 +663,20 @@
         "No - Replaced",
         "No - Not replaced"
       ]
+    },
+    "polesSequence": {
+      "type": "object",
+      "properties": {
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        }
+      }
     }
-  },
-  "required": [
-    "dateTestCompleted",
-    "offlineTestPerformer",
-    "operationsCounter",
-    "oilTests",
-    "firstTripTest",
-    "offLineTimingTests",
-    "dashpots",
-    "notesTimingTests",
-    "travelVelocityAnalysis",
-    "recloserControlTests",
-    "insulationResistanceTest",
-    "hiPotTest",
-    "vacuumSealedIndication",
-    "contactResistance",
-    "pressureSettings",
-    "airCompressor",
-    "hydraulicSystem",
-    "lowGasPressureTests",
-    "springSystems",
-    "coilResistance",
-    "operationsCounter"
-  ]
+  }
 }
