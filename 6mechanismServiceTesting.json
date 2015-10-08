@@ -46,16 +46,16 @@
           "description": "Close-Initiate/Touch(ms)",
           "$ref": "#/definitions/testTemplateWithMinAndMax"
         },
-        "closeInitiate": {
-          "description": "Close-Initiate/Part(ms)",
+        "tripFree": {
+          "description": "Trip Free - Close-Initiate/Part(ms)",
           "$ref": "#/definitions/testTemplateWithMinAndMax"
         },
         "timeTouch": {
-          "description": "Time-Touch/Part(mc)",
+          "description": "Live/Dwell Time-Touch/Part(ms)",
           "$ref": "#/definitions/testTemplateWithMinAndMax"
         },
         "tripInitiateTouch": {
-          "description": "Trip-Initiate/Touch(cy)",
+          "description": "Reclose Trip Initiate/Touch(cy)",
           "$ref": "#/definitions/testTemplateWithMinAndMax"
         },
         "poleDisagreement": {
@@ -80,7 +80,7 @@
       "description": "As-Left Travel/Velocity Tests",
       "properties": {
         "contactStroke": {
-          "description": "distance is greenLegend",
+          "description": "distance is greenLegend? isItOkayAndOther",
           "distance": {
             "type": "number"
           },
@@ -117,6 +117,40 @@
         "notesTravelAnalysis": {
           "type": "string",
           "description": "Notes from travel analysis"
+        }
+      }
+    },
+    "operationsCounter": {
+      "type": "object",
+      "description": "typesIsOkay?",
+      "properties": {
+        "asLeftReading": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "type": "string"
+            },
+            "pole2": {
+              "type": "string"
+            },
+            "pole3": {
+              "type": "string"
+            }
+          }
+        },
+        "functioningCorrectly": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole2": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole3": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            }
+          }
         }
       }
     }
@@ -222,7 +256,5 @@
         }
       }
     }
-  },
-  "required": [
-  ]
+  }
 }
