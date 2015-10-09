@@ -221,20 +221,12 @@
       "description": "Recloser control tests(perform recloser control tests and indicate results",
       "properties": {
         "isTripFuncCorrect": {
-          "type": "string",
           "description": "Tripping fucntion and time correct?",
-          "enum": [
-            "Yes",
-            "No"
-          ]
+          "$ref": "#/definitions/yesNoAnswers"
         },
         "isReclosingFuncCorrect": {
-          "type": "string",
           "description": "Reclosing fucntion and time correct?",
-          "enum": [
-            "Yes",
-            "No"
-          ]
+          "$ref": "#/definitions/yesNoAnswers"
         },
         "noteRecloserTests": {
           "type": "string",
@@ -540,6 +532,13 @@
     }
   },
   "definitions": {
+    "yesNoAnswers": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
     "shortAnswers": {
       "type": "string",
       "description": "Types of possible answers for simple questions",

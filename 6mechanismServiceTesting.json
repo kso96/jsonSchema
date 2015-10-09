@@ -255,6 +255,14 @@
           }
         }
       }
+    },
+    "operationsCounterEnum": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No - Replaced",
+        "No - Not replaced"
+      ]
     }
   }
 }
