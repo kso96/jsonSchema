@@ -6,6 +6,7 @@
   "properties": {
     "diagnosticReport": {
       "type": "object",
+      "title": "Substation Circuit Breaker Diagnostic Report",
       "description": "Substation circuit breaker diagnostic report",
       "properties": {
         "diagnosticReportStatus": {
@@ -71,7 +72,8 @@
     },
     "equipmentData": {
       "type": "object",
-      "description": "Substation circuit breaker diagnostic report",
+      "title": "Equipment Data",
+      "description": "Equipment Data",
       "properties": {
         "manufacturer": {
           "type": "string",
@@ -152,11 +154,11 @@
           "properties": {
             "fault": {
               "type": "integer",
-              "description": "Count of fault?type"
+              "description": "Count of fault"
             },
             "nonFault": {
               "type": "integer",
-              "description": "Count of non-fault?type"
+              "description": "Count of non-fault"
             }
           }
         }
@@ -164,11 +166,12 @@
     },
     "preliminaryTestAndInspections": {
       "type": "object",
+      "title": "Preliminary test and inspections",
       "description": "Preliminary Test And Inspections",
       "properties": {
         "breakerOilAnalysis": {
           "type": "object",
-          "description": "Breaker Oil Analysis?can'tAddRef",
+          "description": "Breaker Oil Analysis",
           "properties": {
             "dateSamplesTaken": {
               "format": "date",
@@ -199,7 +202,7 @@
         },
         "breakerGasAnalysis": {
           "type": "object",
-          "description": "Breaker Gas Analysis?can'tAddRef",
+          "description": "Breaker Gas Analysis",
           "properties": {
             "dateSamplesTaken": {
               "format": "date",
@@ -211,20 +214,33 @@
               "description": "a person who drew samples"
             },
             "moistureDewpoint": {
-              "$ref": "#/definitions/poleIntegerSpecTemplate"
+              "$ref": "#/definitions/poleNumberSpecTemplate"
             },
             "purity": {
-              "$ref": "#/definitions/poleIntegerSpecTemplate"
+              "$ref": "#/definitions/poleNumberSpecTemplate"
             }
           }
         },
         "detailedInfraredInspections": {
-          "$ref": "#/definitions/dateWithSign"
+          "type": "object",
+          "description": "Breaker Gas Analysis",
+          "properties": {
+            "dateSamplesTaken": {
+              "format": "date",
+              "type": "string",
+              "description": "a date when samples were taken"
+            },
+            "sampleDrawnBy": {
+              "type": "string",
+              "description": "a person who drew samples"
+            }
+          }
         }
       }
     },
     "detailedVisualInspections": {
       "type": "object",
+      "title": "Detailed visual inspection",
       "description": "Detailed visual inspection",
       "properties": {
         "dateOfInspection": {
@@ -338,6 +354,7 @@
         },
         "externalInspection": {
           "type": "object",
+          "description":"external inspection",
           "properties": {
             "bushings": {
               "description": "Bushings ok?",
@@ -392,7 +409,8 @@
     },
     "diagnosticTestsAndInspections": {
       "type": "object",
-      "description": "Detailed visual inspection",
+      "title": "Diagnostic tests and inspections",
+      "description": "Diagnostic tests and inspections",
       "properties": {
         "dateTestCompleted": {
           "type": "string",
@@ -476,6 +494,7 @@
             },
             "drop": {
               "type": "object",
+              "description":"Drop",
               "properties": {
                 "spec": {
                   "type": "number",
@@ -558,7 +577,7 @@
         },
         "recloserControlTests": {
           "type": "object",
-          "description": "Recloser control tests(perform recloser control tests and indicate results",
+          "description": "Recloser control tests(perform recloser control tests and indicate results)",
           "properties": {
             "isTripFuncCorrect": {
               "description": "Tripping fucntion and time correct?",
@@ -722,6 +741,17 @@
             }
           }
         },
+        "airCompressor": {
+          "type": "object",
+          "properties": {
+            "isOilReplaced": {
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "isFilterReplaced": {
+              "$ref": "#/definitions/shortAnswers"
+            }
+          }
+        },
         "hydraulicSystem": {
           "type": "object",
           "properties": {
@@ -783,16 +813,16 @@
             "y": {
               "type": "number"
             },
-            "other": {
+            "other1": {
               "type": "string"
             },
-            "other": {
+            "other2": {
               "type": "string"
             },
-            "other": {
+            "other3": {
               "type": "string"
             },
-            "other": {
+            "other4": {
               "type": "string"
             },
             "notes": {
@@ -802,10 +832,10 @@
         },
         "operationsCounter": {
           "type": "object",
-          "description": "typesIsOkay?",
+          "description": "Operations counter",
           "properties": {
             "asLeftReading": {
-              "$ref": "#/definitions/polesSequence"
+              "$ref": "#/definitions/poleNumberTemplate"
             },
             "functioningCorrectly": {
               "type": "object",
@@ -827,6 +857,8 @@
     },
     "mechanismServiceTesting": {
       "type": "object",
+      "title": "Mechanism service and as-left Testing",
+      "description": "Mechanism service and as-left Testing",
       "properties": {
         "dateTestCompleted": {
           "type": "string",
@@ -902,6 +934,7 @@
     },
     "problemList": {
       "type": "object",
+      "title": "Problem list",
       "description": "Problem list",
       "properties": {
         "numberOfProblemsFound": {
@@ -969,6 +1002,7 @@
     },
     "additionalInformation": {
       "type": "object",
+      "title": "Additional information",
       "description": "Additional information",
       "properties": {
         "workDone": {
@@ -1000,21 +1034,6 @@
         "No"
       ]
     },
-    "dateWithSign": {
-      "type": "object",
-      "description": "Object with date and signature",
-      "properties": {
-        "dateSamplesTaken": {
-          "format": "date",
-          "type": "string",
-          "description": "a date when samples were taken"
-        },
-        "sampleDrawnBy": {
-          "type": "string",
-          "description": "a person who drew samples"
-        }
-      }
-    },
     "tankRating": {
       "type": "string",
       "enum": [
@@ -1025,20 +1044,24 @@
         "4*"
       ]
     },
-    "poleIntegerSpecTemplate": {
+    "poleNumberSpecTemplate": {
       "type": "object",
       "properties": {
         "pole1": {
-          "type": "number"
+          "type": "number",
+          "minimum": 0
         },
         "pole2": {
-          "type": "number"
+          "type": "number",
+          "minimum": 0
         },
         "pole3": {
-          "type": "number"
+          "type": "number",
+          "minimum": 0
         },
         "spec": {
-          "type": "number"
+          "type": "number",
+          "minimum": 0
         }
       }
     },
@@ -1117,8 +1140,6 @@
           "type": "number"
         }
       }
-    },
-    "timingTestTemplate": {
     },
     "travelVelocityTemplate": {
       "type": "object",
@@ -1300,20 +1321,6 @@
         "Alarm and Block Trip",
         "Alarm and Block Close"
       ]
-    },
-    "polesSequence": {
-      "type": "object",
-      "properties": {
-        "pole1": {
-          "type": "number"
-        },
-        "pole2": {
-          "type": "number"
-        },
-        "pole3": {
-          "type": "number"
-        }
-      }
     }
   }
 }
