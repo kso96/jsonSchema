@@ -146,12 +146,7 @@
               "$ref": "#/definitions/poleDisagreementTemplate"
             }
           }
-        }
-      }
-    },
-    "dashpots": {
-      "type": "object",
-      "properties": {
+        },
         "leakingOrLowOil": {
           "type": "string",
           "enum": [
@@ -168,60 +163,279 @@
       }
     },
     "travelVelocityAnalysis": {
-      "type": "object",
       "description": "Travel/Velocity Analysis",
+      "$ref": "#/definitions/travelVelocityTemplate"
+    },
+    "recloserControlTests": {
+      "type": "object",
+      "description": "Recloser control tests(perform recloser control tests and indicate results",
       "properties": {
-        "contactStroke": {
-          "description": "distance is greenLegend?isItOkayAndOther",
-          "distance": {
-            "type": "number"
-          },
-          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        "isTripFuncCorrect": {
+          "description": "Tripping fucntion and time correct?",
+          "$ref": "#/definitions/yesNoEnum"
         },
-        "contactWipe": {
-          "description": "distance is greenLegend",
-          "distance": {
-            "type": "number"
-          },
-          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        "isReclosingFuncCorrect": {
+          "description": "Reclosing fucntion and time correct?",
+          "$ref": "#/definitions/yesNoEnum"
         },
-        "overTravel": {
-          "description": "distance is greenLegend",
-          "distance": {
-            "type": "number"
-          },
-          "$ref": "#/definitions/testTemplateWithMinAndMax"
-        },
-        "openVelocity": {
-          "description": "speed is greenLegend",
-          "speed": {
-            "type": "number"
-          },
-          "$ref": "#/definitions/testTemplateWithMinAndMax"
-        },
-        "closeVelocity": {
-          "description": "speed is greenLegend",
-          "speed": {
-            "type": "number"
-          },
-          "$ref": "#/definitions/testTemplateWithMinAndMax"
-        },
-        "notesTravelAnalysis": {
+        "noteRecloserTests": {
           "type": "string",
-          "description": "Notes from travel analysis"
+          "description": "Notes from recloser control tests"
+        }
+      }
+    },
+    "insulationResistanceTest": {
+      "type": "object",
+      "description": "Insulation Resistance Test - Megger or Doble",
+      "properties": {
+        "megger30sec": {
+          "$ref": "#/definitions/poleNumberTemplate"
+        },
+        "megger60sec": {
+          "$ref": "#/definitions/poleNumberTemplate"
+        },
+        "megger2min": {
+          "$ref": "#/definitions/poleNumberTemplate"
+        },
+        "doblePf": {
+          "$ref": "#/definitions/poleNumberTemplate"
+        }
+      }
+    },
+    "hiPotTest": {
+      "type": "object",
+      "description": "Hi-Pot Test? Can I ref pole1,pole2",
+      "properties": {
+        "testVoltage": {
+          "type": "number"
+        },
+        "testVoltageType": {
+          "type": "string",
+          "enum": [
+            "AC",
+            "DC"
+          ]
+        },
+        "accrossOpenContacts": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole2": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole3": {
+              "$ref": "#/definitions/passFailEnum"
+            }
+          }
+        },
+        "contactsClosed": {
+          "type": "object",
+          "description": "is it correct object",
+          "properties": {
+            "pole1": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole2": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole3": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole1to2": {
+              "$ref": "#/definitions/passFailEnum"
+            },
+            "pole2to3": {
+              "$ref": "#/definitions/passFailEnum"
+            }
+          }
+        },
+        "insulationTestComments": {
+          "type": "string"
+        }
+      }
+    },
+    "vacuumSealedIndication": {
+      "type": "object",
+      "description": "Vacuum/Sealed SF6 Contact Wear Indication",
+      "properties": {
+        "wearMeasurementSpec": {
+          "type": "object",
+          "properties": {
+            "new": {
+              "type": "number"
+            },
+            "endOfLife": {
+              "type": "number"
+            }
+          }
+        },
+        "wearMeasurements": {
+          "$ref": "#/definitions/poleNumberTemplate"
+        }
+      }
+    },
+    "contactResistance": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/primaryTestTemplate"
+        },
+        {
+          "properties": {
+            "notes": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "pressureSettings": {
+      "type": "object",
+      "description": "Pressure switch settings",
+      "properties": {
+        "operate": {
+          "type": "object",
+          "description": "types are correct?",
+          "properties": {
+            "compPump": {
+              "type": "string"
+            },
+            "alarm": {
+              "type": "string"
+            },
+            "lockout": {
+              "type": "string"
+            },
+            "preCharge": {
+              "type": "string"
+            }
+          }
+        },
+        "reset": {
+          "type": "object",
+          "description": "types are correct",
+          "properties": {
+            "compPump": {
+              "type": "string"
+            },
+            "alarm": {
+              "type": "string"
+            },
+            "lockout": {
+              "type": "string"
+            },
+            "preCharge": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "hydraulicSystem": {
+      "type": "object",
+      "properties": {
+        "isScreenCleaned": {
+          "$ref": "#/definitions/shortAnswers"
+        },
+        "isHydFluidReplaced": {
+          "$ref": "#/definitions/shortAnswers"
+        }
+      }
+    },
+    "lowGasPressureTests": {
+      "type": "object",
+      "properties": {
+        "function": {
+          "type": "object",
+          "properties": {
+            "stage1": {
+              "$ref": "#/definitions/lowGasTestFunctionEnum"
+            },
+            "stage2": {
+              "$ref": "#/definitions/lowGasTestFunctionEnum"
+            }
+          }
+        },
+        "isFunctioningProperly": {
+          "type": "object",
+          "properties": {
+            "stage1": {
+              "$ref": "#/definitions/yesNoEnum"
+            },
+            "stage2": {
+              "$ref": "#/definitions/yesNoEnum"
+            }
+          }
+        }
+      }
+    },
+    "springSystems": {
+      "description": "Spring systems recharging properly?",
+      "$ref": "#/definitions/yesNoEnum"
+    },
+    "coilResistance": {
+      "type": "object",
+      "description": "typesIsOkay?",
+      "properties": {
+        "closeCoil": {
+          "type": "number"
+        },
+        "tc1": {
+          "type": "number"
+        },
+        "tc2": {
+          "type": "number"
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "other": {
+          "type": "string"
+        },
+        "other": {
+          "type": "string"
+        },
+        "other": {
+          "type": "string"
+        },
+        "other": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "operationsCounter": {
+      "type": "object",
+      "description": "typesIsOkay?",
+      "properties": {
+        "asLeftReading": {
+          "$ref": "#/definitions/polesSequence"
+        },
+        "functioningCorrectly": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole2": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole3": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            }
+          }
         }
       }
     }
   },
   "definitions": {
     "yesNoEnum": {
-      "type": "string",
-      "enum": [
-        "Yes",
-        "No"
-      ]
-    },
-    "yesNoAnswers": {
       "type": "string",
       "enum": [
         "Yes",
@@ -377,6 +591,108 @@
       "pole3": {
         "type": "number"
       }
+    },
+    "travelVelocityTemplate": {
+      "type": "object",
+      "description": "As-Left Travel/Velocity",
+      "properties": {
+        "contactStroke": {
+          "allOf": [
+            {
+              "properties": {
+                "distance": {
+                  "type": "number"
+                }
+              }
+            },
+            {
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            }
+          ]
+        },
+        "contactWipe": {
+          "allOf": [
+            {
+              "properties": {
+                "distance": {
+                  "type": "number"
+                }
+              }
+            },
+            {
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            }
+          ]
+        },
+        "overTravel": {
+          "allOf": [
+            {
+              "properties": {
+                "distance": {
+                  "type": "number"
+                }
+              }
+            },
+            {
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            }
+          ]
+        },
+        "openVelocity": {
+          "allOf": [
+            {
+              "properties": {
+                "speed": {
+                  "type": "number"
+                }
+              }
+            },
+            {
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            }
+          ]
+        },
+        "closeVelocity": {
+          "allOf": [
+            {
+              "properties": {
+                "speed": {
+                  "type": "number"
+                }
+              }
+            },
+            {
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            }
+          ]
+        },
+        "notesTravelAnalysis": {
+          "type": "string",
+          "description": "Notes from travel analysis"
+        }
+      }
+    },
+    "poleNumberTemplate": {
+      "type": "object",
+      "properties": {
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        }
+      }
+    },
+    "operationsCounterEnum": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No - Replaced",
+        "No - Not replaced"
+      ]
     }
   }
 }

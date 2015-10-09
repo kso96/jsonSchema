@@ -332,7 +332,7 @@
     },
     "pressureSettings": {
       "type": "object",
-      "description": "IS IT OKAY?",
+      "description": "Pressure switch settings",
       "properties": {
         "operate": {
           "type": "object",
@@ -507,7 +507,6 @@
       "description": "Primary template for number data",
       "properties": {
         "spec": {
-          "description": "blueLegend",
           "type": "number",
           "minimum": 0
         },
