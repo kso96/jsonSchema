@@ -324,28 +324,10 @@
       }
     },
     "contactResistance": {
-      "type": "object",
-      "properties": {
-        "maxSpec": {
-          "type": "number",
-          "minimum": 0
-        },
-        "pole1": {
-          "type": "number",
-          "minimum": 0
-        },
-        "pole2": {
-          "type": "number",
-          "minimum": 0
-        },
-        "pole3": {
-          "type": "number",
-          "minimum": 0
-        },
-        "notes": {
-          "type": "string",
-          "minimum": 0
-        }
+      "$ref": "#/definitions/primaryTestTemplate",
+      "notes": {
+        "type": "string",
+        "minimum": 0
       }
     },
     "pressureSettings": {
@@ -430,35 +412,18 @@
           "type": "object",
           "properties": {
             "stage1": {
-              "type": "string",
-              "enum": [
-                "Yes",
-                "No"
-              ]
+              "$ref": "#/definitions/yesNoAnswers"
             },
             "stage2": {
-              "type": "string",
-              "enum": [
-                "Yes",
-                "No"
-              ]
+              "$ref": "#/definitions/yesNoAnswers"
             }
           }
         }
       }
     },
     "springSystems": {
-      "type": "object",
-      "description": "isItOkay?",
-      "properties": {
-        "doSystemsRechargingProperly": {
-          "type": "string",
-          "enum": [
-            "Yes",
-            "No"
-          ]
-        }
-      }
+      "description": "Spring systems recharging properly?",
+      "$ref": "#/definitions/yesNoAnswers"
     },
     "coilResistance": {
       "type": "object",
@@ -501,18 +466,7 @@
       "description": "typesIsOkay?",
       "properties": {
         "asLeftReading": {
-          "type": "object",
-          "properties": {
-            "pole1": {
-              "type": "string"
-            },
-            "pole2": {
-              "type": "string"
-            },
-            "pole3": {
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/polesSequence"
         },
         "functioningCorrectly": {
           "type": "object",
