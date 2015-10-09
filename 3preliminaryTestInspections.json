@@ -20,6 +20,7 @@
         "resultScores": {
           "type": "array",
           "description": "Result Scores(Tank)",
+          "maxItems": 3,
           "items": [
             {
               "$ref": "#/definitions/tankRating"

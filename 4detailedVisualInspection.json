@@ -18,19 +18,19 @@
       "description": "Information about inspection of air system",
       "properties": {
         "airSystem": {
-          "description": "Air System?isItOkay: dublicate(airSystem.airSystem)",
+          "description": "Air System?",
           "$ref": "#/definitions/shortAnswers"
         },
         "leaks": {
-          "description": "Leaks",
+          "description": "Leaks?",
           "$ref": "#/definitions/shortAnswers"
         },
         "belts": {
-          "description": "Do belts work correct?",
+          "description": "Belts OK?",
           "$ref": "#/definitions/shortAnswers"
         },
         "oilLevel": {
-          "description": "Oil level ok ",
+          "description": "Oil level OK?",
           "$ref": "#/definitions/shortAnswers"
         },
         "airPressure": {
@@ -40,7 +40,7 @@
         },
         "compressorRunning": {
           "type": "number",
-          "description": "Amount of hours while compressor is running",
+          "description": "Compressor Running Hours",
           "minimum": 0
         }
       }
@@ -50,11 +50,11 @@
       "description": "Information about inspection of hydraulic system",
       "properties": {
         "hydraulicSystem": {
-          "description": "Hydraulic system",
+          "description": "Hydraulic system?",
           "$ref": "#/definitions/shortAnswers"
         },
         "leaks": {
-          "description": "Leaks",
+          "description": "Leaks?",
           "$ref": "#/definitions/shortAnswers"
         },
         "fluidLevel": {
@@ -87,7 +87,7 @@
         },
         "airFilter": {
           "type": "string",
-          "description": "Air filter condition",
+          "description": "Air filter condition?",
           "enum": [
             "N/A",
             "Clean",
@@ -106,68 +106,75 @@
         "heaterState": {
           "description": "Heaters working?",
           "$ref": "#/definitions/shortAnswers"
+        },
+        "noteCabinet": {
+          "type": "string",
+          "description": "Notes from control cabinet visual inspection"
         }
-      },
-      "noteCabinet": {
-        "type": "string",
-        "description": "Notes from control cabinet visual inspection"
       }
     },
     "externalInspection": {
-      "bushings": {
-        "description": "Bushings ok?",
-        "$ref": "#/definitions/shortAnswers"
-      },
-      "animalProtect": {
-        "type": "string",
-        "description": "Animal protection",
-        "enum": [
-          "OK",
-          "None",
-          "Missing",
-          "Damaged"
-        ]
-      },
-      "animalNests": {
-        "description": "Animal protection",
-        "$ref": "#/definitions/shortAnswers"
-      },
-      "grounds": {
-        "description": "Ground ok?",
-        "$ref": "#/definitions/shortAnswers"
-      },
-      "busConnections": {
-        "type": "string",
-        "description": "Bus connections ok?",
-        "enum": [
-          "Yes",
-          "No"
-        ]
-      },
-      "paintCondition": {
-        "type": "string",
-        "description": "Paint condition?",
-        "enum": [
-          "Good",
-          "Fair",
-          "Poor"
-        ]
-      },
-      "oilLeaks": {
-        "description": "Oil leaks?",
-        "$ref": "#/definitions/shortAnswers"
-      },
-      "sfPressure": {
-        "description": "SF6 pressure OK?",
-        "$ref": "#/definitions/shortAnswers"
-      },
-      "noteExternalInspection": {
-        "type": "string",
-        "description": "Notes from external visual inspection"
+      "type": "object",
+      "properties": {
+        "bushings": {
+          "description": "Bushings ok?",
+          "$ref": "#/definitions/shortAnswers"
+        },
+        "animalProtect": {
+          "type": "string",
+          "description": "Animal protection?",
+          "enum": [
+            "OK",
+            "None",
+            "Missing",
+            "Damaged"
+          ]
+        },
+        "animalNests": {
+          "description": "Animal Nests?",
+          "$ref": "#/definitions/shortAnswers"
+        },
+        "grounds": {
+          "description": "Ground ok?",
+          "$ref": "#/definitions/shortAnswers"
+        },
+        "busConnections": {
+          "description": "Bus connections ok?",
+          "$ref": "#/definitions/yesNoEnum"
+
+        },
+        "paintCondition": {
+          "type": "string",
+          "description": "Paint condition?",
+          "enum": [
+            "Good",
+            "Fair",
+            "Poor"
+          ]
+        },
+        "oilLeaks": {
+          "description": "Oil leaks?",
+          "$ref": "#/definitions/shortAnswers"
+        },
+        "sfPressure": {
+          "description": "SF6 pressure OK?",
+          "$ref": "#/definitions/shortAnswers"
+        },
+        "noteExternalInspection": {
+          "type": "string",
+          "description": "Notes from external visual inspection"
+        }
       }
     }
   },
   "definitions": {
+    "yesNoEnum": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
     "shortAnswers": {
       "type": "string",
       "description": "Types of possible answers for simple questions",

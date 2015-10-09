@@ -13,7 +13,7 @@
       "description": "Diagnostic Work Order?limitations"
     },
     "recordableFailure": {
-      "type": "string?type",
+      "type": "string",
       "description": "Recordable Failure?type"
     },
     "followUpNeeded": {

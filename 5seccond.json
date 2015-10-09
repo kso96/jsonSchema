@@ -1,0 +1,382 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Detailed visual inspection",
+  "type": "object",
+  "description": "Detailed visual inspection",
+  "properties": {
+    "dateTestCompleted": {
+      "type": "string",
+      "format": "date",
+      "description": "Date offline testing completed"
+    },
+    "offlineTestPerformer": {
+      "type": "string",
+      "description": "Who did complete offline testing"
+    },
+    "operationsCounter": {
+      "type": "object",
+      "description": "Operation counter?checkTypes",
+      "properties": {
+        "found": {
+          "type": "integer",
+          "description": "As found",
+          "minimum": 0
+        },
+        "left": {
+          "type": "integer",
+          "description": "As left",
+          "minimum": 0
+        },
+        "functioningCorrectly": {
+          "description": "Functioning correctly",
+          "$ref": "#/definitions/shortAnswers"
+        }
+      }
+    },
+    "oilTests": {
+      "type": "object",
+      "description": "Oil tests",
+      "properties": {
+        "dielectric": {
+          "$ref": "#/definitions/primaryTestTemplate"
+        },
+        "color": {
+          "$ref": "#/definitions/stringTestTemplate"
+        },
+        "moisture": {
+          "$ref": "#/definitions/primaryTestTemplate"
+        },
+        "leakDetected": {
+          "$ref": "#/definitions/yesNoEnum",
+          "description": "Leak Detected?"
+        }
+      }
+    },
+    "firstTripTest": {
+      "type": "object",
+      "description": "First Trip Test",
+      "properties": {
+        "tripLatchTime": {
+          "$ref": "#/definitions/primaryTestTemplate"
+        },
+        "concatOpTime": {
+          "$ref": "#/definitions/primaryTestTemplate"
+        },
+        "dcVoltage": {
+          "type": "object",
+          "description": "DC Voltage",
+          "properties": {
+            "vIni": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vMin1": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vMin2": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vMin3": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "drop": {
+          "type": "object",
+          "properties": {
+            "spec": {
+              "type": "number",
+              "description": "pinkLegend?",
+              "minimum": 0
+            },
+            "vDrop1": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vDrop2": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vDrop3": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "contactOpTime": {
+          "$ref": "#/definitions/primaryTestTemplate"
+        }
+      }
+    },
+    "offLineTimingTests": {
+      "type": "object",
+      "description": "Off-line timing tests",
+      "properties": {
+        "tripInitiate": {
+          "description": "Trip-Initiate/Part(ms)",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "closeInitiate": {
+          "description": "Close-Initiate/Touch(ms)",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "tripFreeClose": {
+          "description": "Trip Free - Close Initiate/Part",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "liveDwellTime": {
+          "description": "Live/Dwell Time-Touch/Part",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "tripInitiateTouch": {
+          "description": "Reclose - Trip Initiate/Touch",
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "poleDisagreement": {
+          "description": "Pole Disagreement(ms)",
+          "type": "object",
+          "properties": {
+            "trip": {
+              "$ref": "#/definitions/poleDisagreementTemplate"
+            },
+            "close": {
+              "$ref": "#/definitions/poleDisagreementTemplate"
+            }
+          }
+        }
+      }
+    },
+    "dashpots": {
+      "type": "object",
+      "properties": {
+        "leakingOrLowOil": {
+          "type": "string",
+          "enum": [
+            "OK",
+            "Leaking",
+            "Oil level low",
+            "Leaking & low oil"
+          ]
+        },
+        "notesTimingTests": {
+          "type": "string",
+          "description": "Notes from off-line Timing Tests"
+        }
+      }
+    },
+    "travelVelocityAnalysis": {
+      "type": "object",
+      "description": "Travel/Velocity Analysis",
+      "properties": {
+        "contactStroke": {
+          "description": "distance is greenLegend?isItOkayAndOther",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "contactWipe": {
+          "description": "distance is greenLegend",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "overTravel": {
+          "description": "distance is greenLegend",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "openVelocity": {
+          "description": "speed is greenLegend",
+          "speed": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "closeVelocity": {
+          "description": "speed is greenLegend",
+          "speed": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "notesTravelAnalysis": {
+          "type": "string",
+          "description": "Notes from travel analysis"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "yesNoEnum": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "yesNoAnswers": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "shortAnswers": {
+      "type": "string",
+      "description": "Types of possible answers for simple questions",
+      "enum": [
+        "N/A",
+        "Yes",
+        "No"
+      ]
+    },
+    "primaryTestTemplate": {
+      "type": "object",
+      "description": "Primary template for number data",
+      "properties": {
+        "spec": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pole1": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pole2": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pole3": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "stringTestTemplate": {
+      "type": "object",
+      "description": "Primary template for string data",
+      "properties": {
+        "spec": {
+          "type": "string"
+        },
+        "pole1": {
+          "type": "string"
+        },
+        "pole2": {
+          "type": "string"
+        },
+        "pole3": {
+          "type": "string"
+        }
+      }
+    },
+    "testTemplateWithMinAndMax": {
+      "type": "object",
+      "description": "Primary template for data with min and max fields",
+      "properties": {
+        "specMin": {
+          "type": "number"
+        },
+        "specMax": {
+          "type": "number"
+        },
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        }
+      }
+    },
+    "poleDisagreementTemplate": {
+      "type": "object",
+      "properties": {
+        "specMax": {
+          "type": "number"
+        },
+        "firstToLast": {
+          "type": "number"
+        }
+      }
+    },
+    "insulationResistanceTemplate": {
+      "type": "object",
+      "description": "template for insulation resistance object",
+      "properties": {
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        }
+      }
+    },
+    "passFailEnum": {
+      "type": "string",
+      "enum": [
+        "Pass",
+        "Fail"
+      ]
+    },
+    "lowGasTestFunctionEnum": {
+      "type": "string",
+      "enum": [
+        "Alarm only",
+        "Alarm and Block Trip",
+        "Alarm and Block Close"
+      ]
+    },
+    "operationsCounterEnum": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No - Replaced",
+        "No - Not replaced"
+      ]
+    },
+    "polesSequence": {
+      "type": "object",
+      "properties": {
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        }
+      }
+    },
+    "testTemplateWithMinAndMaxT": {
+      "specMin": {
+        "type": "number"
+      },
+      "specMax": {
+        "type": "number"
+      },
+      "pole1": {
+        "type": "number"
+      },
+      "pole2": {
+        "type": "number"
+      },
+      "pole3": {
+        "type": "number"
+      }
+    }
+  }
+}

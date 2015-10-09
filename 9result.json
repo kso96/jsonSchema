@@ -1,0 +1,572 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Forms",
+  "type": "object",
+  "description": "Set of forms",
+  "properties": {
+    "diagnosticReport": {
+      "type": "object",
+      "description": "Substation circuit breaker diagnostic report",
+      "properties": {
+        "diagnosticReportStatus": {
+          "description": "Diagnostic Report Status",
+          "$ref": "#/definitions/yesNoEnum"
+        },
+        "diagnosticWorkOrder": {
+          "type": "integer",
+          "description": "Diagnostic Work Order?limitations"
+        },
+        "recordableFailure": {
+          "type": "string",
+          "description": "Recordable Failure?type"
+        },
+        "followUpNeeded": {
+          "$ref": "#/definitions/yesNoEnum",
+          "description": "Follow-up Needed"
+        },
+        "failureOccurredDuring": {
+          "type": "string",
+          "enum": [
+            "In-Service",
+            "Testing"
+          ],
+          "description": "Failure Occurred During"
+        },
+        "dateDiagnosticCompleted": {
+          "format": "date",
+          "type": "string",
+          "description": "Date Diagnostic Completed"
+        },
+        "formCompletedBy": {
+          "type": "string",
+          "description": "Form Completed by"
+        },
+        "opCo": {
+          "type": "string",
+          "description": "OpCo?type"
+        },
+        "pmCategory": {
+          "type": "string",
+          "enum": [
+            "Minor",
+            "Complete",
+            "Mechanism Service",
+            "Commission"
+          ],
+          "description": "PM Category"
+        },
+        "substationName": {
+          "type": "string",
+          "description": "Substation Name"
+        },
+        "breakerNumber": {
+          "type": "integer",
+          "description": "Breaker Number?limitations"
+        },
+        "utc": {
+          "type": "integer",
+          "description": "UTC?limitations"
+        }
+      }
+    },
+    "equipmentData": {
+      "type": "object",
+      "description": "Substation circuit breaker diagnostic report",
+      "properties": {
+        "manufacturer": {
+          "type": "string",
+          "description": "Manufacturer"
+        },
+        "model": {
+          "type": "string",
+          "description": "Model"
+        },
+        "serialNumber": {
+          "type": "integer",
+          "description": "Serial Number"
+        },
+        "inServiceDate": {
+          "format": "date",
+          "type": "string",
+          "description": "In Service Date"
+        },
+        "instructionBook": {
+          "type": "string",
+          "description": "Instruction Book"
+        },
+        "mechType": {
+          "type": "string",
+          "description": "Mech type"
+        },
+        "ratedVoltage": {
+          "type": "number",
+          "description": "Rated Voltage",
+          "minimum": 0
+        },
+        "ampacity": {
+          "type": "number",
+          "description": "Ampacity",
+          "minimum": 0
+        },
+        "maxInterruptingAmps": {
+          "type": "number",
+          "description": "Maximum Interrupting Amps"
+        },
+        "mechInstrBk": {
+          "type": "string",
+          "description": "Mech Instr Bk"
+        },
+        "latestCounterRead": {
+          "type": "integer",
+          "description": "Latest Counter Read",
+          "minimum": 0
+        },
+        "numberOfTanks": {
+          "type": "integer",
+          "description": "Number Of Tanks",
+          "minimum": 0
+        },
+        "totalGallonsOfOil": {
+          "type": "number",
+          "description": "Total Gallons Of Oil",
+          "minimum": 0
+        },
+        "totalPoundsOfSf6": {
+          "type": "number",
+          "description": "Total Pounds of SF6",
+          "minimum": 0
+        },
+        "lastMinorDiagDate": {
+          "format": "date",
+          "type": "string",
+          "description": "Last Minor Diag Date"
+        },
+        "lastCompleteDiagDate": {
+          "format": "date",
+          "type": "string",
+          "description": "Last Complete Diag Date"
+        },
+        "numberOperationsSinceLastComplete": {
+          "type": "object",
+          "description": "Number Operations Since Last Complete",
+          "properties": {
+            "fault": {
+              "type": "integer",
+              "description": "Count of fault?type"
+            },
+            "nonFault": {
+              "type": "integer",
+              "description": "Count of non-fault?type"
+            }
+          }
+        }
+      }
+    },
+    "preliminaryTestAndInspections": {
+      "type": "object",
+      "description": "Preliminary Test And Inspections",
+      "properties": {
+        "breakerOilAnalysis": {
+          "type": "object",
+          "description": "Breaker Oil Analysis?can'tAddRef",
+          "properties": {
+            "dateSamplesTaken": {
+              "format": "date",
+              "type": "string",
+              "description": "a date when samples were taken"
+            },
+            "sampleDrawnBy": {
+              "type": "string",
+              "description": "a person who drew samples"
+            },
+            "resultScores": {
+              "type": "array",
+              "description": "Result Scores(Tank)",
+              "maxItems": 3,
+              "items": [
+                {
+                  "$ref": "#/definitions/tankRating"
+                },
+                {
+                  "$ref": "#/definitions/tankRating"
+                },
+                {
+                  "$ref": "#/definitions/tankRating"
+                }
+              ]
+            }
+          }
+        },
+        "breakerGasAnalysis": {
+          "type": "object",
+          "description": "Breaker Gas Analysis?can'tAddRef",
+          "properties": {
+            "dateSamplesTaken": {
+              "format": "date",
+              "type": "string",
+              "description": "a date when samples were taken"
+            },
+            "sampleDrawnBy": {
+              "type": "string",
+              "description": "a person who drew samples"
+            },
+            "moistureDewpoint": {
+              "$ref": "#/definitions/poleTemplate"
+            },
+            "purity": {
+              "$ref": "#/definitions/poleTemplate"
+            }
+          }
+        },
+        "detailedInfraredInspections": {
+          "$ref": "#/definitions/dateWithSign"
+        }
+      }
+    },
+    "detailedVisualInspections": {
+      "type": "object",
+      "description": "Detailed visual inspection",
+      "properties": {
+        "dateOfInspection": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when inspection was done"
+        },
+        "inspectionCompletedBy": {
+          "type": "string",
+          "description": "a person who completed inspection"
+        },
+        "airSystem": {
+          "type": "object",
+          "description": "Information about inspection of air system",
+          "properties": {
+            "airSystem": {
+              "description": "Air System?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "leaks": {
+              "description": "Leaks?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "belts": {
+              "description": "Belts OK?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "oilLevel": {
+              "description": "Oil level OK?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "airPressure": {
+              "type": "number",
+              "description": "Air Pressure",
+              "minimum": 0
+            },
+            "compressorRunning": {
+              "type": "number",
+              "description": "Compressor Running Hours",
+              "minimum": 0
+            }
+          }
+        },
+        "hydraulicSystem": {
+          "type": "object",
+          "description": "Information about inspection of hydraulic system",
+          "properties": {
+            "hydraulicSystem": {
+              "description": "Hydraulic system?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "leaks": {
+              "description": "Leaks?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "fluidLevel": {
+              "description": "Fluid level ok?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "hydraulicPressure": {
+              "type": "number",
+              "description": "Hydraulic Pressure",
+              "minimum": 0
+            },
+            "pumpRunning": {
+              "type": "number",
+              "description": "Amount of hours while pump is running",
+              "minimum": 0
+            },
+            "noteEnergySystem": {
+              "type": "string",
+              "description": "Notes from stored energy system visual inspection"
+            }
+          }
+        },
+        "controlCabinet": {
+          "type": "object",
+          "description": "Information about inspection of cabinet",
+          "properties": {
+            "seals": {
+              "description": "Seals ok?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "airFilter": {
+              "type": "string",
+              "description": "Air filter condition?",
+              "enum": [
+                "N/A",
+                "Clean",
+                "Dirty",
+                "Missing"
+              ]
+            },
+            "controlWiring": {
+              "description": "Control wiring ok?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "evidenceOfAnimals": {
+              "description": "Evidence of animals?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "heaterState": {
+              "description": "Heaters working?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "noteCabinet": {
+              "type": "string",
+              "description": "Notes from control cabinet visual inspection"
+            }
+          }
+        },
+        "externalInspection": {
+          "type": "object",
+          "properties": {
+            "bushings": {
+              "description": "Bushings ok?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "animalProtect": {
+              "type": "string",
+              "description": "Animal protection?",
+              "enum": [
+                "OK",
+                "None",
+                "Missing",
+                "Damaged"
+              ]
+            },
+            "animalNests": {
+              "description": "Animal Nests?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "grounds": {
+              "description": "Ground ok?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "busConnections": {
+              "description": "Bus connections ok?",
+              "$ref": "#/definitions/yesNoEnum"
+            },
+            "paintCondition": {
+              "type": "string",
+              "description": "Paint condition?",
+              "enum": [
+                "Good",
+                "Fair",
+                "Poor"
+              ]
+            },
+            "oilLeaks": {
+              "description": "Oil leaks?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "sfPressure": {
+              "description": "SF6 pressure OK?",
+              "$ref": "#/definitions/shortAnswers"
+            },
+            "noteExternalInspection": {
+              "type": "string",
+              "description": "Notes from external visual inspection"
+            }
+          }
+        }
+      }
+    },
+    "diagnosticTestsAndInspections": {
+      "type": "string"
+    },
+    "mechanismServiceTesting": {
+      "type": "string"
+    },
+    "problemList": {
+      "type": "object",
+      "description": "Problem list",
+      "properties": {
+        "numberOfProblemsFound": {
+          "type": "integer",
+          "description": "Number of problems found",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "problems": {
+          "type": "array",
+          "maxItems": 12,
+          "items": [
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            },
+            {
+              "$ref": "#/definitions/problemItem"
+            }
+          ]
+        }
+      }
+    },
+    "additionalInformation": {
+      "type": "object",
+      "description": "Additional information",
+      "properties": {
+        "workDone": {
+          "type": "string"
+        },
+        "materialsUsed": {
+          "type": "string"
+        },
+        "comments": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "yesNoEnum": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "dateWithSign": {
+      "type": "object",
+      "description": "Object with date and signature",
+      "properties": {
+        "dateSamplesTaken": {
+          "format": "date",
+          "type": "string",
+          "description": "a date when samples were taken"
+        },
+        "sampleDrawnBy": {
+          "type": "string",
+          "description": "a person who drew samples"
+        }
+      }
+    },
+    "tankRating": {
+      "type": "string",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "4*"
+      ]
+    },
+    "poleTemplate": {
+      "type": "object",
+      "properties": {
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        },
+        "spec": {
+          "type": "number"
+        }
+      }
+    },
+    "shortAnswers": {
+      "type": "string",
+      "description": "Types of possible answers for simple questions",
+      "enum": [
+        "N/A",
+        "Yes",
+        "No"
+      ]
+    },
+    "problemCategoriesEnum": {
+      "type": "string",
+      "enum": [
+        "Bushings",
+        "Mechanism -- Stored Energy",
+        "Mechanism -- Other",
+        "Internal -- Insulation",
+        "Internal -- Conduction Path",
+        "Internal -- Interrupters",
+        "Control Cabinet",
+        "Other External"
+      ]
+    },
+    "problemItem": {
+      "type": "object",
+      "properties": {
+        "problemCategory": {
+          "$ref": "#/definitions/problemCategoriesEnum"
+        },
+        "workRequestRequired": {
+          "$ref": "#/definitions/yesNoEnum"
+        },
+        "workRequestNumber": {
+          "type": "integer"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
