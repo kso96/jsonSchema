@@ -211,10 +211,10 @@
               "description": "a person who drew samples"
             },
             "moistureDewpoint": {
-              "$ref": "#/definitions/poleTemplate"
+              "$ref": "#/definitions/poleIntegerSpecTemplate"
             },
             "purity": {
-              "$ref": "#/definitions/poleTemplate"
+              "$ref": "#/definitions/poleIntegerSpecTemplate"
             }
           }
         },
@@ -394,7 +394,79 @@
       "type": "string"
     },
     "mechanismServiceTesting": {
-      "type": "string"
+      "type":"object",
+      "properties": {
+        "dateTestCompleted": {
+          "type": "string",
+          "format": "date",
+          "description": "Date mechanism service completed"
+        },
+        "offlineTestPerformer": {
+          "type": "string",
+          "description": "Who did complete offline testing"
+        },
+        "operationCounter": {
+          "type": "object",
+          "description": "Operations counter",
+          "properties": {
+            "reading": {
+              "$ref": "#/definitions/poleIntegerTemplate"
+            },
+            "generalCondition": {
+              "type": "string",
+              "description": "describe general condition of mechanism..."
+            }
+          }
+        },
+        "timingTests": {
+          "type": "object",
+          "description": "As-Left timing tests",
+          "properties": {
+            "tripInitiate": {
+              "description": "Trip-Initiate/Part(ms)",
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            },
+            "closeInitiate": {
+              "description": "Close-Initiate/Touch(ms)",
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            },
+            "tripFree": {
+              "description": "Trip Free - Close-Initiate/Part(ms)",
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            },
+            "timeTouch": {
+              "description": "Live/Dwell Time-Touch/Part(ms)",
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            },
+            "tripInitiateTouch": {
+              "description": "Reclose Trip Initiate/Touch(cy)",
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            },
+            "poleDisagreement": {
+              "description": "Pole Disagreement(ms)",
+              "type": "object",
+              "properties": {
+                "trip": {
+                  "$ref": "#/definitions/poleDisagreementTemplate"
+                },
+                "close": {
+                  "$ref": "#/definitions/poleDisagreementTemplate"
+                }
+              }
+            },
+            "notesFromTimingTests": {
+              "type": "string"
+            }
+          }
+        },
+        "travelVelocityTests": {
+          "description": "As-Left Travel/Velocity Tests",
+          "$ref": "#/definitions/travelVelocityTemplate"
+        },
+        "operationsCounter": {
+          "$ref": "#/definitions/operationsCounterTemplate"
+        }
+      }
     },
     "problemList": {
       "type": "object",
@@ -487,6 +559,15 @@
         "No"
       ]
     },
+    "shortAnswers": {
+      "type": "string",
+      "description": "Types of possible answers for simple questions",
+      "enum": [
+        "N/A",
+        "Yes",
+        "No"
+      ]
+    },
     "dateWithSign": {
       "type": "object",
       "description": "Object with date and signature",
@@ -512,7 +593,7 @@
         "4*"
       ]
     },
-    "poleTemplate": {
+    "poleIntegerSpecTemplate": {
       "type": "object",
       "properties": {
         "pole1": {
@@ -529,14 +610,19 @@
         }
       }
     },
-    "shortAnswers": {
-      "type": "string",
-      "description": "Types of possible answers for simple questions",
-      "enum": [
-        "N/A",
-        "Yes",
-        "No"
-      ]
+    "poleIntegerTemplate": {
+      "type": "object",
+      "properties": {
+        "pole1": {
+          "type": "integer"
+        },
+        "pole2": {
+          "type": "integer"
+        },
+        "pole3": {
+          "type": "integer"
+        }
+      }
     },
     "problemCategoriesEnum": {
       "type": "string",
@@ -567,6 +653,152 @@
           "type": "string"
         }
       }
+    },
+    "testTemplateWithMinAndMax": {
+      "type": "object",
+      "description": "Primary template for data with min and max fields",
+      "properties": {
+        "specMin": {
+          "type": "number"
+        },
+        "specMax": {
+          "type": "number"
+        },
+        "pole1": {
+          "type": "number"
+        },
+        "pole2": {
+          "type": "number"
+        },
+        "pole3": {
+          "type": "number"
+        }
+      }
+    },
+    "poleDisagreementTemplate": {
+      "type": "object",
+      "properties": {
+        "specMax": {
+          "type": "number"
+        },
+        "firstToLast": {
+          "type": "number"
+        }
+      }
+    },
+    "timingTestTemplate":{
+
+    },
+    "travelVelocityTemplate": {
+      "type": "object",
+      "description": "As-Left Travel/Velocity",
+      "properties": {
+        "contactStroke": {
+          "allOf": [
+            {
+              "properties": {
+                "distance": {
+                  "type": "number"
+                }
+              }
+            },
+            {
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            }
+          ]
+        },
+        "contactWipe": {
+          "allOf": [
+            {
+              "properties": {
+                "distance": {
+                  "type": "number"
+                }
+              }
+            },
+            {
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            }
+          ]
+        },
+        "overTravel": {
+          "allOf": [
+            {
+              "properties": {
+                "distance": {
+                  "type": "number"
+                }
+              }
+            },
+            {
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            }
+          ]
+        },
+        "openVelocity": {
+          "allOf": [
+            {
+              "properties": {
+                "speed": {
+                  "type": "number"
+                }
+              }
+            },
+            {
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            }
+          ]
+        },
+        "closeVelocity": {
+          "allOf": [
+            {
+              "properties": {
+                "speed": {
+                  "type": "number"
+                }
+              }
+            },
+            {
+              "$ref": "#/definitions/testTemplateWithMinAndMax"
+            }
+          ]
+        },
+        "notesTravelAnalysis": {
+          "type": "string",
+          "description": "Notes from travel analysis"
+        }
+      }
+    },
+    "operationsCounterTemplate": {
+      "type": "object",
+      "description": "Operations Counter",
+      "properties": {
+        "asLeftReading": {
+          "$ref": "#/definitions/poleIntegerTemplate"
+        },
+        "functioningCorrectly": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole2": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole3": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            }
+          }
+        }
+      }
+    },
+    "operationsCounterEnum": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No - Replaced",
+        "No - Not replaced"
+      ]
     }
   }
 }

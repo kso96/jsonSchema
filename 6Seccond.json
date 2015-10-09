@@ -14,16 +14,24 @@
       "description": "Who did complete offline testing"
     },
     "operationCounter": {
-      "type": "object",
-      "description": "Operations counter",
-      "properties": {
-        "reading": {
-          "$ref": "#/definitions/poleIntegerTemplate"
-        },
-        "generalCondition": {
-          "type": "string",
-          "description": "describe general condition of mechanism..."
+      "reading": {
+        "type": "object",
+        "description": "isTypeOkay?",
+        "properties": {
+          "pole1": {
+            "type": "string"
+          },
+          "pole2": {
+            "type": "string"
+          },
+          "pole3": {
+            "type": "string"
+          }
         }
+      },
+      "generalCondition": {
+        "type": "string",
+        "description": "describe general condition of mechanism..."
       }
     },
     "timingTests": {
@@ -68,11 +76,83 @@
       }
     },
     "travelVelocityTests": {
+      "type": "object",
       "description": "As-Left Travel/Velocity Tests",
-      "$ref": "#/definitions/travelVelocityTemplate"
+      "properties": {
+        "contactStroke": {
+          "description": "distance is greenLegend? isItOkayAndOther",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "contactWipe": {
+          "description": "distance is greenLegend",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "overTravel": {
+          "description": "distance is greenLegend",
+          "distance": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "openVelocity": {
+          "description": "speed is greenLegend",
+          "speed": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "closeVelocity": {
+          "description": "speed is greenLegend",
+          "speed": {
+            "type": "number"
+          },
+          "$ref": "#/definitions/testTemplateWithMinAndMax"
+        },
+        "notesTravelAnalysis": {
+          "type": "string",
+          "description": "Notes from travel analysis"
+        }
+      }
     },
     "operationsCounter": {
-      "$ref": "#/definitions/operationsCounterTemplate"
+      "type": "object",
+      "description": "typesIsOkay?",
+      "properties": {
+        "asLeftReading": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "type": "string"
+            },
+            "pole2": {
+              "type": "string"
+            },
+            "pole3": {
+              "type": "string"
+            }
+          }
+        },
+        "functioningCorrectly": {
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole2": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            },
+            "pole3": {
+              "$ref": "#/definitions/operationsCounterEnum"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -85,25 +165,12 @@
         "No"
       ]
     },
-    "poleIntegerTemplate": {
-      "type": "object",
-      "properties": {
-        "pole1": {
-          "type": "integer"
-        },
-        "pole2": {
-          "type": "integer"
-        },
-        "pole3": {
-          "type": "integer"
-        }
-      }
-    },
     "primaryTestTemplate": {
       "type": "object",
       "description": "Primary template for number data",
       "properties": {
         "spec": {
+          "description": "blueLegend",
           "type": "number",
           "minimum": 0
         },
@@ -126,9 +193,11 @@
       "description": "Primary template for data with min and max fields",
       "properties": {
         "specMin": {
+          "description": "blueLegend",
           "type": "number"
         },
         "specMax": {
+          "description": "blueLegend",
           "type": "number"
         },
         "pole1": {
@@ -153,95 +222,23 @@
         }
       }
     },
-    "timingTestTemplate":{
-
-    },
-    "travelVelocityTemplate": {
+    "operationsCounter": {
       "type": "object",
-      "description": "As-Left Travel/Velocity",
-      "properties": {
-        "contactStroke": {
-          "allOf": [
-            {
-              "properties": {
-                "distance": {
-                  "type": "number"
-                }
-              }
-            },
-            {
-              "$ref": "#/definitions/testTemplateWithMinAndMax"
-            }
-          ]
-        },
-        "contactWipe": {
-          "allOf": [
-            {
-              "properties": {
-                "distance": {
-                  "type": "number"
-                }
-              }
-            },
-            {
-              "$ref": "#/definitions/testTemplateWithMinAndMax"
-            }
-          ]
-        },
-        "overTravel": {
-          "allOf": [
-            {
-              "properties": {
-                "distance": {
-                  "type": "number"
-                }
-              }
-            },
-            {
-              "$ref": "#/definitions/testTemplateWithMinAndMax"
-            }
-          ]
-        },
-        "openVelocity": {
-          "allOf": [
-            {
-              "properties": {
-                "speed": {
-                  "type": "number"
-                }
-              }
-            },
-            {
-              "$ref": "#/definitions/testTemplateWithMinAndMax"
-            }
-          ]
-        },
-        "closeVelocity": {
-          "allOf": [
-            {
-              "properties": {
-                "speed": {
-                  "type": "number"
-                }
-              }
-            },
-            {
-              "$ref": "#/definitions/testTemplateWithMinAndMax"
-            }
-          ]
-        },
-        "notesTravelAnalysis": {
-          "type": "string",
-          "description": "Notes from travel analysis"
-        }
-      }
-    },
-    "operationsCounterTemplate": {
-      "type": "object",
-      "description": "Operations Counter",
+      "description": "typesIsOkay?",
       "properties": {
         "asLeftReading": {
-          "$ref": "#/definitions/poleIntegerTemplate"
+          "type": "object",
+          "properties": {
+            "pole1": {
+              "type": "string"
+            },
+            "pole2": {
+              "type": "string"
+            },
+            "pole3": {
+              "type": "string"
+            }
+          }
         },
         "functioningCorrectly": {
           "type": "object",
